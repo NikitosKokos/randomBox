@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault(); 
             const codeValue = document.querySelector('input[name="code"]').value;
             if(codeValue === code){
-                window.open(`${window.location.href}roulette.html`,'_self');
+                window.open(`${window.location.href.replace(/index.html/gi,'')}roulette.html`,'_self');
             }else if(codeValue === ''){
                 mistake.textContent = mistake.dataset.zero;
             }else{
