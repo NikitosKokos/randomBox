@@ -1,0 +1,103 @@
+.random {
+    background: #111;
+    height: 100vh;
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+    }
+
+    &__title {
+        font-size: 50px;
+        font-weight: 700;
+        color: #ddd;
+        text-align: center;
+        margin: 0px 0px 20px 0px;
+        .hot{
+            color: red;
+        }
+        .cold{
+            color: blue;
+        }
+    }
+    &__wrapper{
+        transition: all 2.5s linear;
+        height: 100%;
+        display: flex;
+        margin: 0px 0px 0px 50%;
+        &.active{
+            transform: translateX(-100%);
+            margin: 0px 0px 0px 0px;
+        }
+    }
+    &__box {
+        border: 2px solid #ddd;
+        height: 100px;
+        margin: 0px 0px 40px 0px;
+        position: relative;
+        background: #222;
+        overflow: hidden;
+         &:before{
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 12px solid transparent; 
+            border-bottom: 20px solid #ddd;
+            z-index: 2;
+        }
+    }
+    &__button{
+        display: flex;
+        justify-content: center;
+    }
+    &__btn {
+        height: 52px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(180deg, #FFE600 0%, #FFD600 100%);
+        border-radius: 30px;
+        padding: 0 76px;
+        font-weight: 700;
+        color: #141414;
+        position: relative;
+        font-family: 'Exo2';
+        box-shadow: 2px 2px 5px #444;
+        transition: all .3s ease-in-out;
+        cursor: pointer;
+        @media (max-width: $md4+px){
+            width: 100%;
+        }
+        @media (min-width: 992px){
+           &:hover{
+              color: #444;
+         }
+        }
+    }
+}
+
+.box{
+    height: 100%;
+    flex-shrink: 0;
+    &_dark-blue {
+        background: darkblue;
+    }
+    &_blue {
+        background: blue;
+    }
+    &_purple {
+        background: purple;
+    }
+    &_yellow {
+        background: yellow;
+    }
+    &_orange {
+        background: orange;
+    }
+    &_red {
+        background: red;
+    }
+}

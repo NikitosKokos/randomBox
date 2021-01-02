@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+	@@include('_head.html',{
+	"title":"Roulette | Random Box"
+	})
+	<body>
+		<div class="wrapper">
+			@@include('_header.html',{})
+			<main class="page">
+				<section class="random">
+					<div class='random__content _container'>
+						<h1 class="random__title"><span class="hot">Горячо</span> или <span class="cold">холодно</span>?</h1>
+						<div class="random__box">
+							<div class="random__wrapper">
+								
+							</div>
+						</div>
+						<div class="random__button"><div class="random__btn">Крутить!</div></div>
+					</div>
+				</section>
+			</main>
+			@@include('_footer.html',{})
+		</div>
+		@@include('_popup.html',{})
+		@@include('_js.html',{})
+	</body>
+</html>
