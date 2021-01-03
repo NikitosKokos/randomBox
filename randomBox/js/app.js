@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         boxes.forEach( el => {
             const element = document.createElement('div');
             element.className = `box box_${el.class}`;
-            element.style.width = `${el.width}vw`;
+            element.style.width = `${el.width * 10}px`;
             boxWrapper.append(element);
         })
     }
@@ -83,43 +83,93 @@ document.addEventListener('DOMContentLoaded', () => {
         const findEl = arr.find((el,i) => {
             return arrWeight[i] >= rand;
         });
-        boxWrapper.style.transform = `translateX(-${Math.round(rand)}vw)`;
+        boxWrapper.style.transform = `translateX(-${Math.round(rand) * 10}px)`;
         return findEl;
     }
 
     function resetingBox(){
         boxWrapper.style.transition = '0s';
         boxWrapper.style.transform = 'translateX(0)';
-    }
+    } 
+    const getScrollBarWidth = () =>{
+        const item = document.createElement('div');
+        
+        item.style.position = 'absolute';
+        item.style.top = '-9999px';
+        item.style.width = '50px';
+        item.style.height = '50px';
+        item.style.overflow = 'scroll';
+        item.style.visibility = 'hidden';
 
-    let winEl;
-    if(window.location.href.slice(window.location.href.length - 13) === 'roulette.html'){
-    const randBtn = document.querySelector('.random__btn');
-    randBtn.addEventListener('click', () => {
+        document.body.appendChild(item);
+        const scrollBarWidth = item.offsetWidth - item.clientWidth;
+        document.body.removeChild(item);
+
+        return scrollBarWidth;
+    }
+    const randBtn = document.querySelector('.random__btn_go');
+    const randBtnGet = document.querySelector('.random__btn_get');
+    function showPopup(t){ 
+        setTimeout(() => {
+            document.querySelector(`.popup_${winEl.class}`).classList.add('_active');
+            document.body.classList.add('hidden');
+            randBtn.disabled = false;
+            randBtnGet.disabled = false;
+            document.body.style.paddingRight = `${getScrollBarWidth()}px`;
+        },t);
+     }
+
+     function getWinPopup(t){
+            setTimeout(() => {
+                randBtnGet.classList.add('_active');
+            },t);
+            
+            randBtnGet.addEventListener('click', () => {
+                keyIsDown = false;
+                showPopup(0);
+            });
+     }
+
+     function checkWinEl(){
         if(!winEl){
             winEl = selectBox(boxes);
+            randBtn.disabled = true;
+            keyIsDown = false;
+            showPopup(timeDelay);
         }else{
             resetingBox();
             setTimeout(() => {
                 boxWrapper.style.transition = 'all 2.5s linear';
                 winEl = selectBox(boxes);
             },0);
+            randBtn.disabled = true;
+            randBtnGet.disabled = true;
+            keyIsDown = false;
+            showPopup(timeDelay);
+            getWinPopup(timeDelay);
         }
-            
-    });
+     }
+
+    let winEl;
+    const timeDelay = 3000;
+    let keyIsDown = true;
+    if(window.location.href.slice(window.location.href.length - 13) === 'roulette.html'){
+   
+    randBtn.addEventListener('click',checkWinEl);
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            if(!winEl){
-                winEl = selectBox(boxes);
-                // setTimeout(resetingBox,5000);
-            }else{
-                resetingBox();
-                setTimeout(() => {
-                    boxWrapper.style.transition = 'all 2.5s linear';
-                    winEl = selectBox(boxes);
-                },0);
-            }
+        if (e.key === 'Enter' && keyIsDown) {
+            checkWinEl();
         }
+      });
+
+      const popups = document.querySelectorAll('.popup');
+      popups.forEach(element => {
+        element.querySelector('.popup__close').addEventListener('click', () => {
+            element.classList.remove('_active');
+            document.body.classList.remove('hidden');
+            document.body.style.paddingRight = '0px';
+            keyIsDown = true;
+        });
       });
     }
 

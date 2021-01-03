@@ -37,3 +37,142 @@
         visibility: visible;
     }
 }
+
+
+// box popup
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $white;
+    overflow: auto;
+    z-index: 99999;
+    &_dark-blue {
+        .popup__title{
+            span{
+                color: darkblue;
+            }
+        }
+    }
+
+    &_blue {
+        .popup__title{
+            span{
+                color: blue;
+            }
+        }
+    }
+
+    &_purple {
+        .popup__title{
+            span{
+                color: purple;
+            }
+        }
+    }
+
+    &_yellow {
+        .popup__title{
+            span{
+                color: yellow;
+            }
+        }
+    }
+
+    &_orange {
+        .popup__title{
+            span{
+                color: orange;
+            }
+        }
+    }
+
+    &_red {
+        .popup__title{
+            span{
+                color: red;
+            }
+        }
+    }
+
+    &__content {
+        position: relative;
+        min-height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__body {
+        padding: 40px 0;
+    }
+
+    &__title {
+        font-size: 44px;
+        font-weight: 700;
+        font-family: "Exo2";
+        text-align: center;
+        margin: 0px 0px 30px 0px;
+        @media (max-width: $md2+px){
+           font-size: 38px;
+        }
+        @media (max-width: 600px){
+           font-size: 30px;
+        }
+    }
+
+    &__img {
+        max-width: 500px;
+        margin: 0 auto 30px auto;
+        img{
+            width: 100%;
+            height: auto;
+        }
+    }
+    &__button{
+        display: flex;
+        justify-content: center;
+    }
+    &__btn {
+        box-shadow: none;
+        height: 52px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(180deg, #FFE600 0%, #FFD600 100%);
+        border-radius: 30px;
+        padding: 0 76px;
+        font-weight: 700;
+        color: #141414;
+        position: relative;
+        font-family: 'Exo2';
+        transition: all .3s ease-in-out;
+        @media (min-width: 992px){
+           &:hover{
+              color: #444;
+         }
+        }
+    }
+    &__close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        cursor: pointer; 
+        svg{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s ease-in-out;
+    &._active{
+        opacity: 1;
+        visibility: visible;
+    }
+}
